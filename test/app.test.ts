@@ -1,8 +1,8 @@
 import { createHmac, generateKeyPairSync } from 'node:crypto'
 import { createLocalJWKSet, jwtVerify } from 'jose'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
-import app from '../src/index'
-import { signPayload } from '../src/cookie'
+import app from '../src/index.js'
+import { signPayload } from '../src/cookie.js'
 
 const BROKER = 'https://broker.example'
 const CLUB_ORIGIN = 'https://club.example'

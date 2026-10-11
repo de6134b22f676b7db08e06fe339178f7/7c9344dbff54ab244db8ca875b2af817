@@ -1,5 +1,5 @@
-import type { Config } from './config'
-import { signJwt } from './jwt'
+import type { Config } from './config.js'
+import { signJwt } from './jwt.js'
 
 export type EventType = 'facebook.data_deletion' | 'facebook.deauthorize'
 export interface FanoutResult {

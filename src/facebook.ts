@@ -1,6 +1,6 @@
 import { createHmac } from 'node:crypto'
-import type { Config } from './config'
-import { hmac, safeEqual } from './cookie'
+import type { Config } from './config.js'
+import { hmac, safeEqual } from './cookie.js'
 
 const TIMEOUT_MS = 8000
 

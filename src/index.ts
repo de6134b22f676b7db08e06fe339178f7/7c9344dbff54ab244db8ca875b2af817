@@ -1,7 +1,7 @@
 import { randomBytes } from 'node:crypto'
 import { Hono, type Context } from 'hono'
 import { bodyLimit } from 'hono/body-limit'
-import { loadConfig, type Config } from './config'
+import { loadConfig, type Config } from './config.js'
 import {
   clearCookieHeader,
   readStateCookie,
@@ -12,11 +12,11 @@ import {
   type StatePayload,
   COOKIE_NAME,
   COOKIE_TTL_S,
-} from './cookie'
-import { authorizeUrl, fetchProfile, parseSignedRequest } from './facebook'
-import { fanOut, type EventType } from './fanout'
-import { newJti, publicJwks, signJwt } from './jwt'
-import { isClubId, isNonce, isState, validateReturnTo } from './validate'
+} from './cookie.js'
+import { authorizeUrl, fetchProfile, parseSignedRequest } from './facebook.js'
+import { fanOut, type EventType } from './fanout.js'
+import { newJti, publicJwks, signJwt } from './jwt.js'
+import { isClubId, isNonce, isState, validateReturnTo } from './validate.js'
 
 const app = new Hono()
 

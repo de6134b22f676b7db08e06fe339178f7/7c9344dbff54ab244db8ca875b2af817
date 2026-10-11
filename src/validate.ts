@@ -1,4 +1,4 @@
-import type { Club } from './config'
+import type { Club } from './config.js'
 
 const NONCE_RE = /^[A-Za-z0-9_-]{16,128}$/
 const STATE_RE = /^[A-Za-z0-9._~-]{1,256}$/

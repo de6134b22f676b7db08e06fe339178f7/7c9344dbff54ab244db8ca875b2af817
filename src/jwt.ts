@@ -1,6 +1,6 @@
 import { randomBytes } from 'node:crypto'
 import { SignJWT, importJWK } from 'jose'
-import type { Config } from './config'
+import type { Config } from './config.js'
 
 export const newJti = () => randomBytes(16).toString('base64url')
 
