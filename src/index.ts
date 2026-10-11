@@ -73,10 +73,6 @@ function backToClub(returnTo: string, params: Record<string, string>): Response 
 
 app.get('/v1/facebook/start', (c) => {
   const cfg = cfgOf()
-  if (!cfg.facebookConfigured) return page(c, 503, 'Not configured', 'Facebook sign-in is not configured on this broker.')
-  if (!cfg.brokerOrigin || !cfg.cookieSecret || !cfg.signingKeys.length) {
-    return page(c, 503, 'Not configured', 'The broker is missing required configuration.')
-  }
   const q = c.req.query()
   const club = isClubId(q.club) ? cfg.clubs.find((x) => x.id === q.club) : undefined
   if (!club) return page(c, 400, 'Bad request', 'Unknown club.')
@@ -84,6 +80,12 @@ app.get('/v1/facebook/start', (c) => {
   if (!returnTo) return page(c, 400, 'Bad request', 'Invalid return_to.')
   if (!isNonce(q.nonce)) return page(c, 400, 'Bad request', 'Invalid nonce.')
   if (!isState(q.state)) return page(c, 400, 'Bad request', 'Invalid state.')
+
+  // Inputs are validated first so misuse is reported even while Facebook is disabled.
+  if (!cfg.facebookConfigured) return page(c, 503, 'Not configured', 'Facebook sign-in is not configured on this broker.')
+  if (!cfg.brokerOrigin || !cfg.cookieSecret || !cfg.signingKeys.length) {
+    return page(c, 503, 'Not configured', 'The broker is missing required configuration.')
+  }
 
   const fbState = randomBytes(32).toString('base64url')
   const payload: StatePayload = {

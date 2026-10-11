@@ -371,3 +371,11 @@ describe('meta webhooks', () => {
     expect((await app.request('/v1/facebook/deletion-status?code=abc.def')).status).toBe(404)
   })
 })
+
+describe('disabled mode validation order', () => {
+  it('still returns 400 for bad input while disabled', async () => {
+    setEnv({ FACEBOOK_APP_ID: undefined, FACEBOOK_APP_SECRET: undefined })
+    expect((await app.request(startUrl({ club: 'nope' }))).status).toBe(400)
+    expect((await app.request(startUrl({ return_to: 'https://evil.example/cb' }))).status).toBe(400)
+  })
+})
